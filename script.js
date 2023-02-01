@@ -13,22 +13,27 @@ function getRandomNumber() {
   return Math.floor(Math.random() * 20) + 1;
 }
 
+function displayMessage(message) {
+  resultStatusClass.textContent = message;
+}
+
 let randomNumber = getRandomNumber();
 
-btnCheck.addEventListener('click', () => {
+function guessedNumber() {
   const guessedNumber = guessedNumberClass.value;
   if (!guessedNumber) {
-    resultStatusClass.textContent = '🚫 No Number Guessed ';
+    displayMessage('🚫 No Number Guessed ');
+    body.style.background = '#222';
   } else {
     if (guessedNumber == randomNumber) {
-      resultStatusClass.textContent = '🎇🎉🎇 Correct Number!';
+      displayMessage('🎇🎉🎇 Correct Number!');
       body.style.background = 'green';
       if (parseInt(highScore.textContent) < intScore) {
         highScore.textContent = intScore;
       }
     } else {
       if (intScore <= 0) {
-        resultStatusClass.textContent = 'Game Over! You Lose';
+        displayMessage('Game Over! You Lose');
       } else {
         resultStatusClass.textContent =
           guessedNumber < randomNumber ? 'Oops Too Low!' : 'Oops Too High!';
@@ -38,14 +43,15 @@ btnCheck.addEventListener('click', () => {
       }
     }
   }
-});
+}
 
 function restartGame() {
   body.style.background = '#222';
   score.textContent = '20';
   randomNumber = getRandomNumber();
   guessedNumberClass.value = '';
-  resultStatusClass.textContent = 'Start guessing...';
+  displayMessage('Start guessing...');
 }
 
+btnCheck.addEventListener('click', guessedNumber);
 btnAgain.addEventListener('click', restartGame);
