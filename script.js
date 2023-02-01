@@ -16,7 +16,6 @@ function getRandomNumber() {
 let randomNumber = getRandomNumber();
 
 btnCheck.addEventListener('click', () => {
-  console.log(randomNumber);
   const guessedNumber = guessedNumberClass.value;
   if (guessedNumber == randomNumber) {
     resultStatusClass.textContent = '🎇🎉🎇 Correct Number!';
