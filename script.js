@@ -17,21 +17,25 @@ let randomNumber = getRandomNumber();
 
 btnCheck.addEventListener('click', () => {
   const guessedNumber = guessedNumberClass.value;
-  if (guessedNumber == randomNumber) {
-    resultStatusClass.textContent = '🎇🎉🎇 Correct Number!';
-    body.style.background = 'green';
-    if (parseInt(highScore.textContent) < intScore) {
-      highScore.textContent = intScore;
-    }
+  if (!guessedNumber) {
+    resultStatusClass.textContent = '🚫 No Number Guessed ';
   } else {
-    if (intScore <= 0) {
-      resultStatusClass.textContent = 'Game Over! You Lose';
+    if (guessedNumber == randomNumber) {
+      resultStatusClass.textContent = '🎇🎉🎇 Correct Number!';
+      body.style.background = 'green';
+      if (parseInt(highScore.textContent) < intScore) {
+        highScore.textContent = intScore;
+      }
     } else {
-      resultStatusClass.textContent =
-        guessedNumber < randomNumber ? 'Oops Too Low!' : 'Oops Too High!';
-      body.style.background = 'red';
-      intScore = intScore - 1;
-      score.textContent = intScore;
+      if (intScore <= 0) {
+        resultStatusClass.textContent = 'Game Over! You Lose';
+      } else {
+        resultStatusClass.textContent =
+          guessedNumber < randomNumber ? 'Oops Too Low!' : 'Oops Too High!';
+        body.style.background = 'red';
+        intScore = intScore - 1;
+        score.textContent = intScore;
+      }
     }
   }
 });
